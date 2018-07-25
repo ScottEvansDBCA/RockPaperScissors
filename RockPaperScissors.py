@@ -2,7 +2,7 @@
 You select your option, the computer has theirs at the ready and see who wins!'''
 
 def initial_input():
-    user_choice = input("Rock... Paper... Scissors...\nChoose r, p or s to make your choice\nYou're going with: ")
+    user_choice = input("Rock... Paper... Scissors...\nChoose R, P or S to make your choice\nYou're going with: ")
     return user_choice
 
 def check_who_won(comp_choice, usr_choice):
@@ -33,6 +33,16 @@ def check_who_won(comp_choice, usr_choice):
 total_score = 0
 computer_score = 0
 
+def play_again_func():
+    play_again = input("Would you like to play another game? Y/N: ")
+    if play_again.upper() == "Y":
+        main_logic()
+    elif play_again.upper() == "N":
+        exit()
+    else:
+        print("Invalid input.")
+        play_again_func()
+
 def main_logic():
     import random
     computer_choice = random.randint(1,3)
@@ -42,6 +52,7 @@ def main_logic():
     result = check_who_won(computer_choice, user_choice)
     if result == "ERROR":
         print("You have not made a valid selection, please try again.")
+        main_logic()
     elif result == "W":
         total_score += 1
         print("Congratulations, you win!")
@@ -51,10 +62,6 @@ def main_logic():
         computer_score += 1
         print("Unlucky! You lose.")
     print("Your score is: {}\nThe computer is on: {}" .format(total_score, computer_score))
-    play_again = input("Would you like to play another game? Y/N: ")
-    if play_again.upper() == "Y":
-        main_logic()
-    else:
-        pass
+    play_again_func()
 
 main_logic()
